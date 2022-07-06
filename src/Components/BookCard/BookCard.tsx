@@ -1,11 +1,23 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import { Container } from "@mui/system";
-import { Book } from "../types/Book";
+import { Book } from "../../types/Book";
 
-const BookCard = (book: Book) => {
+interface IProps {
+  book: Book;
+}
+const BookCard = ({ book }: IProps) => {
   return (
-    <Container maxWidth="xl">
-      <Card sx={{ display: "flex" }}>
+    <>
+      <Card
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          padding: "0.5rem",
+          margin: "2rem",
+        }}
+      >
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <CardContent sx={{ flex: "1 0 auto" }}>
             <Typography component="div" variant="h4">
@@ -24,7 +36,7 @@ const BookCard = (book: Book) => {
           </CardContent>
         </Box>
       </Card>
-    </Container>
+    </>
   );
 };
 

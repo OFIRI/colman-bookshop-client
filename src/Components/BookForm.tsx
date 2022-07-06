@@ -2,7 +2,7 @@ import { Container, Grid, Typography, TextField, Button } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string, number, mixed } from "yup";
-import { Book } from "../../types/Book";
+import { Book } from "../types/Book";
 
 const schema = object().shape({
   title: string().required("Title is required"),
