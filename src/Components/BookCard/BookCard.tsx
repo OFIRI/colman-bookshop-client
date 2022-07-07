@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import { Book } from "../../types/Book";
 
@@ -33,6 +33,7 @@ const BookCard = ({ book }: IProps) => {
             <Typography component="div" color="green" variant="overline">
               ${book.price}
             </Typography>
+            <Button>Details</Button>
           </CardContent>
         </Box>
       </Card>
