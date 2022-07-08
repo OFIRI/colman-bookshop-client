@@ -1,8 +1,7 @@
 import { Book } from "../../types/Book";
 import BookCard from "../BookCard/BookCard";
 import { Container } from "@mui/system";
-import axios from "axios";
-import { Button } from "@mui/material";
+
 const books: Book[] = [
   {
     _id: "0",

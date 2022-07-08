@@ -1,11 +1,16 @@
 import { Box, Button, Card, CardContent, Typography } from "@mui/material";
-import { Container } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 import { Book } from "../../types/Book";
 
 interface IProps {
   book: Book;
 }
 const BookCard = ({ book }: IProps) => {
+  const navigate = useNavigate();
+  const toDetailScreen = (bookId: string) => {
+    navigate(`/BookDetails/${bookId}`);
+  };
+
   return (
     <>
       <Card
@@ -33,7 +38,13 @@ const BookCard = ({ book }: IProps) => {
             <Typography component="div" color="green" variant="overline">
               ${book.price}
             </Typography>
-            <Button>Details</Button>
+            <Button
+              onClick={() => {
+                toDetailScreen(book._id);
+              }}
+            >
+              Details
+            </Button>
           </CardContent>
         </Box>
       </Card>

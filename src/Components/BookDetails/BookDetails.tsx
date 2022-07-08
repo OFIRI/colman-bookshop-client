@@ -1,14 +1,24 @@
 import { Typography } from "@mui/material";
 import { Container } from "@mui/system";
-import { Book } from "../../types/Book";
+import { useParams } from "react-router-dom";
 
-interface IProps {
-  book: Book;
-}
-const BookDetails = ({ book }: IProps) => {
-  <Container sx={{ display: "flex" }}>
-    <Typography paragraph>Title : {book.title}</Typography>
-  </Container>;
+const BookDetails = () => {
+  const { id } = useParams();
+  return (
+    <Container
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+    >
+      <Typography paragraph>Title : </Typography>
+      <Typography paragraph>Author : </Typography>
+      <Typography paragraph>Title : </Typography>
+      <Typography paragraph>Description : </Typography>
+      <Typography paragraph>Price : </Typography>
+    </Container>
+  );
 };
 
 export default BookDetails;

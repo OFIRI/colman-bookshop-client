@@ -23,9 +23,6 @@ interface IBookFormProps {
   submitHandle: SubmitHandler<Book>;
 }
 const BookForm = ({ book, submitHandle }: IBookFormProps) => {
-  const test = () => {
-    console.log("this is the test");
-  };
   const {
     register,
     handleSubmit,
