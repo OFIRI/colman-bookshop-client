@@ -93,29 +93,24 @@ const books: Book[] = [
     inventory: 533,
   },
 ];
-const testLogin = async () => {
-  const user = { userName: "oded", password: "123456" };
-  const response = await axios.post("http://localhost:8080/login", user);
-  console.log(response);
-};
+
 const BookListPage = () => {
   return (
-    // <Container
-    //   maxWidth="xl"
-    //   sx={{
-    //     display: "inline-flex",
-    //     flexDirection: "row",
-    //     alignItems: "start",
-    //     flexWrap: "wrap",
-    //   }}
-    // >
-    //   {books.map((bookItem) => (
-    //     <div key={bookItem._id}>
-    //       <BookCard book={bookItem} key={bookItem._id} />
-    //     </div>
-    //   ))}
-    // </Container>
-    <Button onClick={testLogin}>click me oded</Button>
+    <Container
+      maxWidth="xl"
+      sx={{
+        display: "inline-flex",
+        flexDirection: "row",
+        alignItems: "start",
+        flexWrap: "wrap",
+      }}
+    >
+      {books.map((bookItem) => (
+        <div key={bookItem._id}>
+          <BookCard book={bookItem} key={bookItem._id} />
+        </div>
+      ))}
+    </Container>
   );
 };
 
