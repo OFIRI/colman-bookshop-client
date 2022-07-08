@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
+import BookListPage from "../BookListPage/BookListPage";
 
-const HomePage = () =>{
-    return (
-        <div>
-          <p>this is the home page</p>
-        </div>
-      );
-}
-  
+const HomePage = () => {
+  return (
+    <>
+      <BookListPage />
+    </>
+  );
+};
+
 export default HomePage;
