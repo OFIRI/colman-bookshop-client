@@ -4,5 +4,9 @@ class BookApi {
     console.log(book);
     return book;
   }
+  static async editBook(book: Book): Promise<Book> {
+    console.log(book);
+    return book;
+  }
 }
 export default BookApi;

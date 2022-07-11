@@ -19,10 +19,9 @@ const schema = object().shape({
 });
 
 interface IBookFormProps {
-  book?: Book;
   submitHandle: SubmitHandler<Book>;
 }
-const BookForm = ({ book, submitHandle }: IBookFormProps) => {
+const BookForm = ({ submitHandle }: IBookFormProps) => {
   const {
     register,
     handleSubmit,
