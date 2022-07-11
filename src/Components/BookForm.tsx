@@ -19,14 +19,15 @@ const schema = object().shape({
 });
 
 interface IBookFormProps {
+  book?: Book;
   submitHandle: SubmitHandler<Book>;
 }
-const BookForm = ({ submitHandle }: IBookFormProps) => {
+const BookForm = ({ submitHandle, book }: IBookFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({ resolver: yupResolver(schema), defaultValues: book });
   return (
     <div>
       <Container maxWidth="xs">
@@ -38,6 +39,17 @@ const BookForm = ({ submitHandle }: IBookFormProps) => {
                 Add New Book
               </Typography>
             </Grid>
+            {book ? (
+              <Grid item xs={12}>
+                <TextField
+                  {...register("_id")}
+                  id="_id"
+                  label="id"
+                  disabled
+                  fullWidth
+                />
+              </Grid>
+            ) : null}
             <Grid item xs={12}>
               <TextField
                 {...register("title")}
