@@ -1,7 +1,7 @@
 import { Container, Grid, Typography, TextField, Button } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { object, string, number, mixed } from "yup";
+import { object, string, number } from "yup";
 import { Book } from "../types/Book";
 
 const schema = object().shape({
@@ -34,11 +34,6 @@ const BookForm = ({ submitHandle, book }: IBookFormProps) => {
         {/* @ts-ignore */}
         <form onSubmit={handleSubmit(submitHandle)}>
           <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Typography component="h1" variant="h5">
-                Add New Book
-              </Typography>
-            </Grid>
             {book ? (
               <Grid item xs={12}>
                 <TextField
