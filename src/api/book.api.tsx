@@ -98,5 +98,8 @@ class BookApi {
     console.log("this is the edit ", book);
     return book;
   }
+  static async deleteBook(id: string) {
+    console.log("this is the delete ", id);
+  }
 }
 export default BookApi;

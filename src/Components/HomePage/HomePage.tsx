@@ -1,11 +1,9 @@
-import EditBookPage from "../EditBookPage/EditBookPage";
+import BookTable from "../BookTable/BookTable";
 
 const HomePage = () => {
   return (
     <>
-      {/* <BookListPage /> */}
-      {/* <EditBookForm book={BookApi.books[0]} submitHandle={BookApi.editBook} /> */}
-      <EditBookPage />
+      <BookTable></BookTable>
     </>
   );
 };
