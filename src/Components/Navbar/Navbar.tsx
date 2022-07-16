@@ -13,13 +13,15 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
+import { SessionContextStore } from '../../contexts/SessionContext/SessionContext';
 
-const pages = [{name: 'Books', route: '/'}, {name: 'About Us', route: '/about-us'}];
+const pages = [{name: 'Books', route: '/'}, {name: 'About Us', route: '/about-us'}, {name: 'Register', route: '/register'}, {name: 'Login', route: '/login'}, {name: 'Manage', route: '/admin'}];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const {user, isAdmin} = React.useContext(SessionContextStore);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -39,7 +41,7 @@ const Navbar = () => {
   return (
     <AppBar position="static">
       <div>
-        <Toolbar disableGutters>
+        <Toolbar variant="dense">
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
@@ -88,7 +90,13 @@ const Navbar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
+              {pages.filter(page => {
+                if (!user && (page.name === "Register" || page.name === "Login"))
+                  return false;
+                if (!isAdmin && (page.name === "Manage"))
+                  return false;
+                return true;
+              }).map((page) => (
                 <Link to={page.route} style={{ textDecoration: 'none' }}>
                   <MenuItem key={page.name} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page.name}</Typography>
@@ -117,7 +125,13 @@ const Navbar = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.filter(page => {
+                if (!user && (page.name === "Register" || page.name === "Login"))
+                  return false;
+                if (!isAdmin && (page.name === "Manage"))
+                  return false;
+                return true;
+              }).map((page) => (
               <Link to={page.route} style={{ textDecoration: 'none' }}>
                 <Button
                   key={page.name}
@@ -133,7 +147,7 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt={`${user?.first_name} ${user?.last_name}`} src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
