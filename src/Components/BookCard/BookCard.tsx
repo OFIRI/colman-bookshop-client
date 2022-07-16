@@ -1,5 +1,7 @@
 import { Box, Button, Card, CardContent, Typography } from "@mui/material";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { ShoppingContextStore } from "../../contexts/ShoppingContext/ShoppingContext";
 import { Book } from "../../types/Book";
 
 interface IProps {
@@ -7,6 +9,7 @@ interface IProps {
 }
 const BookCard = ({ book }: IProps) => {
   const navigate = useNavigate();
+  const {addToCart} = useContext(ShoppingContextStore);
   const toDetailScreen = (bookId: string) => {
     navigate(`/BookDetails/${bookId}`);
   };
@@ -44,6 +47,9 @@ const BookCard = ({ book }: IProps) => {
               }}
             >
               Details
+            </Button>
+            <Button onClick={() => addToCart(book)}>
+              Add to Cart
             </Button>
           </CardContent>
         </Box>
