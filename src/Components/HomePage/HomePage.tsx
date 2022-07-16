@@ -1,10 +1,9 @@
-import React from "react";
-import BookListPage from "../BookListPage/BookListPage";
+import BookTable from "../BookTable/BookTable";
 
 const HomePage = () => {
   return (
     <>
-      <BookListPage />
+      <BookTable></BookTable>
     </>
   );
 };
