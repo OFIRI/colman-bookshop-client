@@ -1,4 +1,5 @@
 import { Book } from "../types/Book";
+import axios from "../Utils/axios";
 class BookApi {
   static books: Book[] = [
     {
@@ -90,6 +91,15 @@ class BookApi {
       inventory: 533,
     },
   ];
+  static async getAllBooks(): Promise<Book[]> {
+    try {
+      const response = await axios.get("books/");
+      const books = response.data;
+      return books;
+    } catch (error) {
+      throw error;
+    }
+  }
   static async createBook(book: Book): Promise<Book> {
     console.log("this the create ", book);
     return book;

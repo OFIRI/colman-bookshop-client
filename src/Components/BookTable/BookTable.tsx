@@ -5,10 +5,21 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import { useEffect, useState } from "react";
 import BookApi from "../../api/book.api";
+import { Book } from "../../types/Book";
 import BookRow from "./BookRow";
 
 const BookTable = () => {
+  const [books, setBooks] = useState<Book[]>();
+  useEffect(() => {
+    const getBooks = async () => {
+      const data = await BookApi.getAllBooks();
+      setBooks(data);
+      console.log(books);
+    };
+    getBooks();
+  }, []);
   return (
     <Table stickyHeader>
       <TableHead>
@@ -24,9 +35,7 @@ const BookTable = () => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {BookApi.books.map((book) => (
-          <BookRow book={book} key={book._id} />
-        ))}
+        {books && books.map((book) => <BookRow book={book} key={book._id} />)}
       </TableBody>
     </Table>
   );
