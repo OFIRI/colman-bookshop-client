@@ -28,7 +28,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/EditBook/:id" element={<EditBookPage />} />
               <Route
-                path="/admin"
+                path="/admin/*"
                 element={
                   <AdminProtectedRoute>
                     <AdminPage />

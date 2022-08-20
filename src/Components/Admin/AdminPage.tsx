@@ -1,6 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Container, Grid, Paper, TextField, Typography } from "@mui/material";
+import { Button, Container, Grid, Paper, Switch, TextField, Typography } from "@mui/material";
 import React, { FC, ReactNode } from "react";
+import { Route, Routes } from "react-router-dom";
+import AdminUsersView from "./AdminSections/AdminUsersView";
 
 
 type AdminPageProps = {
@@ -9,14 +11,17 @@ type AdminPageProps = {
 
 
 const AdminPage: FC<AdminPageProps> = ({children}) =>{
-
     return (
-        <Grid container>
-            <Container>
-                <Typography variant="h1">Admin Page</Typography>
-            </Container>
-        </Grid>
-    )
+      <Grid container>
+        <Container>
+          <Typography variant="h1">Admin Page</Typography>
+        </Container>
+
+        <Routes>
+          <Route path={`users`} element={<AdminUsersView />} />
+        </Routes>
+      </Grid>
+    );
 }
 
 export default AdminPage;
