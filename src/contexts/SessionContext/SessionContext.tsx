@@ -17,7 +17,7 @@ export interface SessionState {
 
 
 const defaultState: SessionState = {
-    isAdmin: false
+    isAdmin: true
 }
 
 const reducer = (state:SessionState, action: SessionAction) => {
