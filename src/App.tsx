@@ -26,10 +26,15 @@ function App() {
               <Route path="/BookDetails/:id" element={<BookDetails />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/admin" element={
-                <AdminProtectedRoute>
-                  <AdminPage />
-                </AdminProtectedRoute>}/>
+              <Route path="/EditBook/:id" element={<EditBookPage />} />
+              <Route
+                path="/admin"
+                element={
+                  <AdminProtectedRoute>
+                    <AdminPage />
+                  </AdminProtectedRoute>
+                }
+              />
             </Routes>
           </div>
         </ShoppingContext>

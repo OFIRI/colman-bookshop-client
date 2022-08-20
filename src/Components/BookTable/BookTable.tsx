@@ -16,7 +16,6 @@ const BookTable = () => {
     const getBooks = async () => {
       const data = await BookApi.getAllBooks();
       setBooks(data);
-      console.log(books);
     };
     getBooks();
   }, []);

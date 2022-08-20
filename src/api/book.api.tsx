@@ -100,11 +100,30 @@ class BookApi {
       throw error;
     }
   }
+  static async getBook(id: string): Promise<Book> {
+    try {
+      const response = await axios.get("books/" + id);
+      const book: Book = response.data;
+      return book;
+    } catch (error) {
+      throw error;
+    }
+  }
   static async createBook(book: Book): Promise<Book> {
-    console.log("this the create ", book);
-    return book;
+    try {
+      const response = await axios.post("/books", book);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
   }
   static async editBook(book: Book): Promise<Book> {
+    try {
+      const response = await axios.put("/books/" + book._id, book);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
     console.log("this is the edit ", book);
     return book;
   }

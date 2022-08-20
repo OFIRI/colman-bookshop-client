@@ -8,7 +8,7 @@ interface IBookRowProps {
   book: Book;
 }
 
-const BookRow = ({ book }: IBookRowProps) => {
+const BookRow = ({ book }: IBookRowProps, key: string) => {
   const navigate = useNavigate();
   const handleDetails = (bookId: string) => {
     navigate(`/BookDetails/${bookId}`);
@@ -17,7 +17,7 @@ const BookRow = ({ book }: IBookRowProps) => {
     navigate(`/EditBook/${bookId}`);
   };
   return (
-    <TableRow>
+    <TableRow key={key}>
       <TableCell align="center">{book._id}</TableCell>
       <TableCell align="center">{book.title}</TableCell>
       <TableCell align="center">{book.author}</TableCell>
