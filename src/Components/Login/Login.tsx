@@ -1,8 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Container, Grid, Paper, TextField } from "@mui/material";
-import React, { FC, ReactNode } from "react";
+import axios from "axios";
+import React, { FC, ReactNode, useContext } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from 'yup';
+import SessionContext, { SessionContextStore } from "../../contexts/SessionContext/SessionContext";
+import { BASE_URL } from "../../Utils/axios";
 import './Login.css';
 
 
@@ -23,11 +26,12 @@ const LoginSchema = yup.object().shape({
 const Login: FC<LoginProps> = ({children}) =>{
 
     const {register, handleSubmit, formState: { errors }} = useForm<LoginForm>({resolver: yupResolver(LoginSchema)})
+    const {login} = useContext(SessionContextStore);
 
-    const onSubmit = (form:LoginForm) =>{
-        console.log(form);
+    const onSubmit = async (form:LoginForm) =>{
+        const { password, email} = form;
+        await login({password, username: email});
     }
-    console.log(errors)
 
     return (
         <Grid container alignItems='center' justifyContent='center' className="login-container">
