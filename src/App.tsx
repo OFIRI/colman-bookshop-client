@@ -12,6 +12,7 @@ import SessionContext from "./contexts/SessionContext/SessionContext";
 import Login from "./Components/Login/Login";
 import AdminProtectedRoute from "./Components/ProtectedRoutes/AdminProtectedRoutes";
 import AdminPage from "./Components/Admin/AdminPage";
+import BookTable from "./Components/BookTable/BookTable";
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               <Route path="/EditBook/:id" element={<EditBookPage />} />
+              <Route path="/CreateBook" element={<CreateBookPage />} />
+              <Route path="/BooksTable" element={<BookTable />} />
               <Route
                 path="/admin/*"
                 element={

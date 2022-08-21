@@ -1,96 +1,6 @@
 import { Book } from "../types/Book";
 import axios from "../Utils/axios";
 class BookApi {
-  static books: Book[] = [
-    {
-      _id: "0",
-      title: "test",
-      author: "tets",
-      description: "desc",
-      price: 12,
-      inventory: 5,
-    },
-    {
-      _id: "1",
-      title: "test1",
-      author: "tets111",
-      description: "desc1",
-      price: 121,
-      inventory: 51,
-    },
-    {
-      _id: "2",
-      title: "testdcdc",
-      author: "tetsdcdc",
-      description: "descdcdc",
-      price: 1233,
-      inventory: 533,
-    },
-    {
-      _id: "3",
-      title: "testdcdc",
-      author: "tetsdcdc",
-      description: "descdcdc",
-      price: 1233,
-      inventory: 533,
-    },
-    {
-      _id: "4",
-      title: "testdcdc",
-      author: "tetsdcdc",
-      description: "descdcdc",
-      price: 1233,
-      inventory: 533,
-    },
-    {
-      _id: "5",
-      title: "testdcdc",
-      author: "tetsdcdc",
-      description: "descdcdc",
-      price: 1233,
-      inventory: 533,
-    },
-    {
-      _id: "6",
-      title: "testdcdc",
-      author: "tetsdcdc",
-      description: "descdcdc",
-      price: 1233,
-      inventory: 533,
-    },
-    {
-      _id: "7",
-      title: "testdcdc",
-      author: "tetsdcdc",
-      description: "descdcdc",
-      price: 1233,
-      inventory: 533,
-    },
-    {
-      _id: "8",
-      title: "testdcdc",
-      author: "tetsdcdc",
-      description: "descdcdc",
-      price: 1233,
-      inventory: 533,
-    },
-    {
-      _id: "9",
-      title: "testdcdc",
-      author: "tetsdcdc",
-      description: "descdcdc",
-      price: 1233,
-      inventory: 533,
-    },
-    {
-      _id: "10",
-      title: "testdcdc",
-      author: "tetsdcdc",
-      description: "descdcdc",
-      price: 1233,
-      inventory: 533,
-    },
-  ];
   static async getAllBooks(): Promise<Book[]> {
     try {
       const response = await axios.get("books/");
@@ -124,11 +34,14 @@ class BookApi {
     } catch (error) {
       throw error;
     }
-    console.log("this is the edit ", book);
-    return book;
   }
-  static async deleteBook(id: string) {
-    console.log("this is the delete ", id);
+  static async deleteBook(id: string): Promise<string> {
+    try {
+      const response = await axios.delete("/books/" + id);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
   }
 }
 export default BookApi;

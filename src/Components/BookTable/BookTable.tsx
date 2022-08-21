@@ -19,6 +19,14 @@ const BookTable = () => {
     };
     getBooks();
   }, []);
+
+  const handleDelete = (oldBook: Book) => {
+    if (books) {
+      const tempBooks = [...books];
+      const bookArray = tempBooks.filter((book) => book._id != oldBook._id);
+      setBooks(bookArray);
+    }
+  };
   return (
     <Table stickyHeader>
       <TableHead>
@@ -34,7 +42,14 @@ const BookTable = () => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {books && books.map((book) => <BookRow book={book} key={book._id} />)}
+        {books &&
+          books.map((book) => (
+            <BookRow
+              book={book}
+              key={book._id}
+              removeBook={(oldBook: Book) => handleDelete(oldBook)}
+            />
+          ))}
       </TableBody>
     </Table>
   );
