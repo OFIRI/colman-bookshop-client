@@ -19,7 +19,6 @@ const BookRow = ({ book, key, removeBook }: IBookRowProps) => {
     navigate(`/EditBook/${bookId}`);
   };
   const handleDelete = async (id: string) => {
-    console.log("thos is the delete");
     try {
       const response = await BookApi.deleteBook(id);
       removeBook(book);

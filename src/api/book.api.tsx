@@ -30,6 +30,7 @@ class BookApi {
   static async editBook(book: Book): Promise<Book> {
     try {
       const response = await axios.put("/books/" + book._id, book);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       throw error;

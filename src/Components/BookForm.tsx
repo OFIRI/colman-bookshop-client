@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string, number } from "yup";
 import { Book } from "../types/Book";
+import { useEffect } from "react";
 
 const schema = object().shape({
   title: string().required("Title is required"),
@@ -27,7 +28,10 @@ const BookForm = ({ submitHandle, book }: IBookFormProps) => {
     register,
     handleSubmit,
     formState: { errors },
+    formState,
+    reset,
   } = useForm({ resolver: yupResolver(schema), defaultValues: book });
+
   return (
     <div>
       <Container maxWidth="xs">
