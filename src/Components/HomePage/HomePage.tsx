@@ -1,9 +1,9 @@
-import BookTable from "../BookTable/BookTable";
+import BookListPage from "../BookListPage/BookListPage";
 
 const HomePage = () => {
   return (
     <>
-      <BookTable></BookTable>
+      <BookListPage></BookListPage>
     </>
   );
 };
