@@ -1,8 +1,5 @@
-import axios from 'axios';
 import React, { createContext, FC, useEffect, useReducer } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {Book} from '../../types/Book';
-import { BASE_URL } from '../../Utils/axios';
 import { ACTIONS, ShoppingAction } from './actions';
 
 export interface Item {
@@ -20,7 +17,6 @@ export interface ShoppingState {
     addToCart: (book:Book) => void,
     deleteOneFromCart: (book:Book) => void,
     deleteFromCart: (book:Book) => void,
-    buyItems: () => Promise<void>
 }
 
 
@@ -29,7 +25,6 @@ const defaultState: ShoppingState = {
     addToCart: () => console.log("unimplemented"),
     deleteOneFromCart: () => console.log("unimplemented"),
     deleteFromCart: () => console.log("unimplemented"),
-    buyItems: async () => console.log("unimplemented"),
 }
 
 const reducer = (state:ShoppingState, action: ShoppingAction) => {
@@ -39,8 +34,6 @@ const reducer = (state:ShoppingState, action: ShoppingAction) => {
         case ACTIONS.UPDATE_CART: 
             const { shoppingCart } = state;
             return {...state, shoppingCart: {...shoppingCart}}
-        case "CLEAR_CART": 
-            return { ...state, shoppingCart: {}}
         default:
             return state;
     }
@@ -54,7 +47,6 @@ type ShoppingContextProps = {
 
 const ShoppingContext: FC<ShoppingContextProps> = ({children, ...props}) => {
     const [state, dispatch] = useReducer(reducer, defaultState);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const result = window.localStorage.getItem("shoppingCart")
@@ -93,17 +85,8 @@ const ShoppingContext: FC<ShoppingContextProps> = ({children, ...props}) => {
         }
     }
 
-    const buyItems = async () => {
-        const { shoppingCart } = state;
-        const token = localStorage.getItem('token');
-        const { data } = await axios.post(BASE_URL+'orders', { shoppingCart }, { headers: { authorization: `Bearer ${token}`}});
-        dispatch({type: "CLEAR_CART", payload: shoppingCart})
-        window.localStorage.setItem("shoppingCart", JSON.stringify({}));
-        navigate("/");
-    }
 
-
-    return <ShoppingContextStore.Provider value={{...state, addToCart, deleteOneFromCart, deleteFromCart, dispatch, buyItems}}>
+    return <ShoppingContextStore.Provider value={{...state, addToCart, deleteOneFromCart, deleteFromCart, dispatch}}>
         {children}
     </ShoppingContextStore.Provider>
 }

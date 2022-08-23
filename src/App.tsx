@@ -12,7 +12,6 @@ import SessionContext from "./contexts/SessionContext/SessionContext";
 import Login from "./Components/Login/Login";
 import AdminProtectedRoute from "./Components/ProtectedRoutes/AdminProtectedRoutes";
 import AdminPage from "./Components/Admin/AdminPage";
-import ViewCart from "./Components/ShoppingCart/ViewCart";
 
 function App() {
   return (
@@ -27,7 +26,6 @@ function App() {
               <Route path="/BookDetails/:id" element={<BookDetails />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/cart" element={<ViewCart />} />
               <Route path="/admin/*" element={
                 <AdminProtectedRoute>
                   <AdminPage />
