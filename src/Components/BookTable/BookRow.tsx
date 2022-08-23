@@ -6,11 +6,9 @@ import BookApi from "../../api/book.api";
 
 interface IBookRowProps {
   book: Book;
-  key: string;
-  removeBook: Function;
 }
 
-const BookRow = ({ book, key, removeBook }: IBookRowProps) => {
+const BookRow = ({ book }: IBookRowProps) => {
   const navigate = useNavigate();
   const handleDetails = (bookId: string) => {
     navigate(`/BookDetails/${bookId}`);
@@ -18,16 +16,8 @@ const BookRow = ({ book, key, removeBook }: IBookRowProps) => {
   const handleEdit = (bookId: string) => {
     navigate(`/EditBook/${bookId}`);
   };
-  const handleDelete = async (id: string) => {
-    try {
-      const response = await BookApi.deleteBook(id);
-      removeBook(book);
-    } catch (error) {
-      throw error;
-    }
-  };
   return (
-    <TableRow key={key}>
+    <TableRow>
       <TableCell align="center">{book._id}</TableCell>
       <TableCell align="center">{book.title}</TableCell>
       <TableCell align="center">{book.author}</TableCell>
@@ -44,7 +34,7 @@ const BookRow = ({ book, key, removeBook }: IBookRowProps) => {
         </IconButton>
       </TableCell>
       <TableCell align="center">
-        <IconButton onClick={() => handleDelete(book._id)}>
+        <IconButton onClick={() => BookApi.deleteBook(book._id)}>
           <Delete />
         </IconButton>
       </TableCell>
