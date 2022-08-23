@@ -9,7 +9,7 @@ const CreateBookPage = () => {
   const createBookFunc = async (book: Book) => {
     try {
       const response = await BookApi.createBook(book);
-      navigate(`/BooksTable`);
+      navigate(`/admin/books`);
     } catch (error) {
       console.log(error);
     }

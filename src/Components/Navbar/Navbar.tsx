@@ -66,7 +66,7 @@ const Navbar = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            TOAR books
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

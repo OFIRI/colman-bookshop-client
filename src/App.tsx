@@ -44,9 +44,6 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               <Route path="/cart" element={<ViewCart />} />
-              <Route path="/EditBook/:id" element={<EditBookPage />} />
-              <Route path="/BooksTable" element={<BookTableContainer />} />
-              <Route path="/CreateBook" element={<CreateBookPage />} />
               <Route path="/AuthorTable" element={<AuthorTable />} />
 
               <Route

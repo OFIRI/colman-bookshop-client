@@ -16,12 +16,14 @@ import AdminOrdersView from "./AdminSections/AdminOrderView";
 import AdminUsersView from "./AdminSections/AdminUsersView";
 import './AdminPage.css';
 import BookTableContainer from "../BookTable/BookTableContainer";
+import EditBookPage from "../EditBookPage/EditBookPage";
+import CreateBookPage from "../CreateBookPage/CreateBookPage";
 
 type AdminPageProps = {
   children?: ReactNode;
 };
 
-const dict = ["users", "orders", "books"];
+const dict = ["users", "orders", "books", "CreateBook"];
 
 const AdminPage: FC<AdminPageProps> = ({ children }) => {
   const [tab, setTab] = useState(0);
@@ -68,8 +70,9 @@ const AdminPage: FC<AdminPageProps> = ({ children }) => {
         sx={{ borderRight: 1, borderColor: "divider" }}
         >
         <Tab label="Users" />
-        <Tab label="Orders" />
+        <Tab label="orders" />
         <Tab label="books" />
+        <Tab label="Add book" />
       </Tabs>
           </Grid>
 
@@ -81,6 +84,12 @@ const AdminPage: FC<AdminPageProps> = ({ children }) => {
       </Routes>
       <Routes>
         <Route path="books" element={<BookTableContainer />} />
+      </Routes>
+      <Routes>
+        <Route path="/EditBook/:id" element={<EditBookPage />} />
+      </Routes>
+      <Routes>
+          <Route path="/CreateBook" element={<CreateBookPage />} />
       </Routes>
     </Grid>
   );
