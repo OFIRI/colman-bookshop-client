@@ -20,7 +20,7 @@ export interface ShoppingState {
     addToCart: (book:Book) => void,
     deleteOneFromCart: (book:Book) => void,
     deleteFromCart: (book:Book) => void,
-    buyItems: () => Promise<void>
+    buyItems: (price: number) => Promise<void>
 }
 
 
@@ -49,7 +49,7 @@ const reducer = (state:ShoppingState, action: ShoppingAction) => {
 export const ShoppingContextStore = createContext(defaultState);
 
 type ShoppingContextProps = {
-    children: JSX.Element[],
+    children: JSX.Element[] | JSX.Element,
 };
 
 const ShoppingContext: FC<ShoppingContextProps> = ({children, ...props}) => {
@@ -93,10 +93,10 @@ const ShoppingContext: FC<ShoppingContextProps> = ({children, ...props}) => {
         }
     }
 
-    const buyItems = async () => {
+    const buyItems = async (price: number) => {
         const { shoppingCart } = state;
         const token = localStorage.getItem('token');
-        const { data } = await axios.post(BASE_URL+'orders', { shoppingCart }, { headers: { authorization: `Bearer ${token}`}});
+        const { data } = await axios.post(BASE_URL+'orders', { shoppingCart, price }, { headers: { authorization: `Bearer ${token}`}});
         dispatch({type: "CLEAR_CART", payload: shoppingCart})
         window.localStorage.setItem("shoppingCart", JSON.stringify({}));
         navigate("/");

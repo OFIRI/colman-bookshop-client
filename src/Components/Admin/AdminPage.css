@@ -1,0 +1,8 @@
+.blurred-text {
+    text-shadow: 0 0 13px black;
+    color: transparent;
+}
+
+.bold {
+    font-weight: bold;
+}

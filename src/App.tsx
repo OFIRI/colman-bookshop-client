@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import BookDetails from "./Components/BookDetails/BookDetails";
 import CreateBookPage from "./Components/CreateBookPage/CreateBookPage";
@@ -14,8 +14,22 @@ import AdminProtectedRoute from "./Components/ProtectedRoutes/AdminProtectedRout
 import AdminPage from "./Components/Admin/AdminPage";
 import ViewCart from "./Components/ShoppingCart/ViewCart";
 import BookTableContainer from "./Components/BookTable/BookTableContainer";
+import { io } from "socket.io-client";
+
+const socket = io("ws://localhost:5000");
 
 function App() {
+  useEffect(() => {
+    const id = localStorage.getItem('userId');
+    if(id){
+      socket.emit('sendUser', id);
+    }
+
+    return () => {
+      socket.emit('dc');
+    };
+  }, []);
+
   return (
     <Router>
       <SessionContext>
@@ -30,8 +44,8 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/cart" element={<ViewCart />} />
               <Route path="/EditBook/:id" element={<EditBookPage />} />
-              <Route path="/CreateBook" element={<CreateBookPage />} />
               <Route path="/BooksTable" element={<BookTableContainer />} />
+              <Route path="/CreateBook" element={<CreateBookPage />} />
               <Route
                 path="/admin/*"
                 element={

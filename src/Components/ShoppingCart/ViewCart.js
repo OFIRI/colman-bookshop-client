@@ -6,6 +6,8 @@ import './ViewCart.css';
 const ViewCart = () => {
     const { shoppingCart, buyItems } = useContext(ShoppingContextStore);
 
+    const price = Object.keys(shoppingCart).reduce((prev, curr) => prev + (shoppingCart[curr].quantity * shoppingCart[curr].book.price) , 0);
+
     return <Container style={{marginTop: "2vh"}}>
         <Typography className="cart-title" variant="h4">Your cart:</Typography>
         { shoppingCart && Object.keys(shoppingCart).map((itemId) => (<>
@@ -24,13 +26,13 @@ const ViewCart = () => {
             </Grid>
             <Grid item style={{margin: "1vh 0"}}>
                 <Typography variant="h6" className="final-price">
-                    {Object.keys(shoppingCart).reduce((prev, curr) => prev + (shoppingCart[curr].quantity * shoppingCart[curr].book.price) , 0)}$
+                    {price}$
                 </Typography>
             </Grid>
         </Grid>
         <Grid container wrap="nowrap" justifyContent="end" alignItems="center">
             <Grid item style={{margin: "1vh 0"}}>
-                <Button variant="contained" onClick={buyItems}>Purchase</Button>
+                <Button variant="contained" onClick={() => buyItems(price)}>Purchase</Button>
             </Grid>
         </Grid>
     </Container>
