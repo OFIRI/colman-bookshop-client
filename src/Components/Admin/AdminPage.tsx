@@ -14,12 +14,14 @@ import React, { FC, ReactNode, useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import AdminOrdersView from "./AdminSections/AdminOrderView";
 import AdminUsersView from "./AdminSections/AdminUsersView";
+import './AdminPage.css';
+import BookTableContainer from "../BookTable/BookTableContainer";
 
 type AdminPageProps = {
   children?: ReactNode;
 };
 
-const dict = ["users", "orders"];
+const dict = ["users", "orders", "books"];
 
 const AdminPage: FC<AdminPageProps> = ({ children }) => {
   const [tab, setTab] = useState(0);
@@ -50,10 +52,13 @@ const AdminPage: FC<AdminPageProps> = ({ children }) => {
 
   return (
     <Grid container>
-      <Container>
-        <Typography variant="h1">Admin Page</Typography>
+      <Container maxWidth="xl">
+        <Grid container style={{marginTop: '2vh'}}>
+        <Typography variant="h4">Admin Page</Typography>
+        </Grid>
       </Container>
-      <Container></Container>
+    <Grid container>
+
       <Tabs
         orientation="vertical"
         variant="scrollable"
@@ -61,16 +66,21 @@ const AdminPage: FC<AdminPageProps> = ({ children }) => {
         onChange={handleChangeTab}
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: "divider" }}
-      >
+        >
         <Tab label="Users" />
         <Tab label="Orders" />
+        <Tab label="books" />
       </Tabs>
+          </Grid>
 
       <Routes>
         <Route path={`users`} element={<AdminUsersView />} />
       </Routes>
       <Routes>
         <Route path={`orders`} element={<AdminOrdersView />} />
+      </Routes>
+      <Routes>
+        <Route path="books" element={<BookTableContainer />} />
       </Routes>
     </Grid>
   );

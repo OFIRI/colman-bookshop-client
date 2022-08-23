@@ -28,7 +28,7 @@ export interface SessionState {
 
 
 const defaultState: SessionState = {
-    isAdmin: true,
+    isAdmin: false,
     login: async () => console.log(""),
     signUp: async () => console.log(""),
     loadUser: async () => console.log(""),
@@ -42,7 +42,7 @@ const reducer = (state:SessionState, action: SessionAction) => {
             case ACTIONS.LOAD_TOKEN:
                 return {...state, token: action.payload};
                 case ACTIONS.LOGOUT:
-                    return {...state, token: null, user: null};
+                    return {...state, token: null, user: null, isAdmin: false};
         default:
             return state;
     }
@@ -87,6 +87,7 @@ const SessionContext: FC<SessionContextProps> = ({children, ...props}) => {
         localStorage.removeItem("token")
         localStorage.removeItem("userId")
         dispatch({type: ACTIONS.LOGOUT, payload: {}});
+        navigate('/')
     } 
 
 
