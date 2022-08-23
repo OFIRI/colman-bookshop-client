@@ -13,6 +13,7 @@ import Login from "./Components/Login/Login";
 import AdminProtectedRoute from "./Components/ProtectedRoutes/AdminProtectedRoutes";
 import AdminPage from "./Components/Admin/AdminPage";
 import ViewCart from "./Components/ShoppingCart/ViewCart";
+import BookTableContainer from "./Components/BookTable/BookTableContainer";
 
 function App() {
   return (
@@ -28,10 +29,17 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               <Route path="/cart" element={<ViewCart />} />
-              <Route path="/admin/*" element={
-                <AdminProtectedRoute>
-                  <AdminPage />
-                </AdminProtectedRoute>}/>
+              <Route path="/EditBook/:id" element={<EditBookPage />} />
+              <Route path="/CreateBook" element={<CreateBookPage />} />
+              <Route path="/BooksTable" element={<BookTableContainer />} />
+              <Route
+                path="/admin/*"
+                element={
+                  <AdminProtectedRoute>
+                    <AdminPage />
+                  </AdminProtectedRoute>
+                }
+              />
             </Routes>
           </div>
         </ShoppingContext>

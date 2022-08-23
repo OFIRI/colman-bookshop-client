@@ -5,10 +5,16 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import { useEffect, useState } from "react";
 import BookApi from "../../api/book.api";
+import { Book } from "../../types/Book";
 import BookRow from "./BookRow";
 
-const BookTable = () => {
+interface IBookTableProps {
+  books: Book[];
+  handleDelete: Function;
+}
+const BookTable = ({ books, handleDelete }: IBookTableProps) => {
   return (
     <Table stickyHeader>
       <TableHead>
@@ -24,9 +30,14 @@ const BookTable = () => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {BookApi.books.map((book) => (
-          <BookRow book={book} key={book._id} />
-        ))}
+        {books &&
+          books.map((book) => (
+            <BookRow
+              book={book}
+              key={book._id}
+              removeBook={(oldBook: Book) => handleDelete(oldBook)}
+            />
+          ))}
       </TableBody>
     </Table>
   );
