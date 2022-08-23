@@ -12,7 +12,7 @@ import SessionContext from "./contexts/SessionContext/SessionContext";
 import Login from "./Components/Login/Login";
 import AdminProtectedRoute from "./Components/ProtectedRoutes/AdminProtectedRoutes";
 import AdminPage from "./Components/Admin/AdminPage";
-import BookTable from "./Components/BookTable/BookTable";
+import BookTableContainer from "./Components/BookTable/BookTableContainer";
 
 function App() {
   return (
@@ -29,7 +29,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/EditBook/:id" element={<EditBookPage />} />
               <Route path="/CreateBook" element={<CreateBookPage />} />
-              <Route path="/BooksTable" element={<BookTable />} />
+              <Route path="/BooksTable" element={<BookTableContainer />} />
               <Route
                 path="/admin/*"
                 element={

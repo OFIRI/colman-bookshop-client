@@ -1,6 +1,29 @@
 import { Book } from "../types/Book";
 import axios from "../Utils/axios";
 class BookApi {
+  static async getFilteredBooks(
+    title: string,
+    author: string,
+    price: number
+  ): Promise<Book[]> {
+    try {
+      const response = await axios.get(
+        "books/" +
+          "author=" +
+          author +
+          "&" +
+          "title=" +
+          title +
+          "&" +
+          "price=" +
+          price
+      );
+      const data = response.data;
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
   static async getAllBooks(): Promise<Book[]> {
     try {
       const response = await axios.get("books/");

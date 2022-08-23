@@ -28,8 +28,6 @@ const BookForm = ({ submitHandle, book }: IBookFormProps) => {
     register,
     handleSubmit,
     formState: { errors },
-    formState,
-    reset,
   } = useForm({ resolver: yupResolver(schema), defaultValues: book });
 
   return (

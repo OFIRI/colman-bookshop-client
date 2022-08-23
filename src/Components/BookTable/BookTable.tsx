@@ -10,23 +10,11 @@ import BookApi from "../../api/book.api";
 import { Book } from "../../types/Book";
 import BookRow from "./BookRow";
 
-const BookTable = () => {
-  const [books, setBooks] = useState<Book[]>();
-  useEffect(() => {
-    const getBooks = async () => {
-      const data = await BookApi.getAllBooks();
-      setBooks(data);
-    };
-    getBooks();
-  }, []);
-
-  const handleDelete = (oldBook: Book) => {
-    if (books) {
-      const tempBooks = [...books];
-      const bookArray = tempBooks.filter((book) => book._id != oldBook._id);
-      setBooks(bookArray);
-    }
-  };
+interface IBookTableProps {
+  books: Book[];
+  handleDelete: Function;
+}
+const BookTable = ({ books, handleDelete }: IBookTableProps) => {
   return (
     <Table stickyHeader>
       <TableHead>
