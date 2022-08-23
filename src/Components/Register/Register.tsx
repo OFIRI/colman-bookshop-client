@@ -37,6 +37,7 @@ const Register: FC<RegisterProps> = ({children}) =>{
             first_name: form.first_name,
             last_name: form.last_name,
             id: "",
+            _id: "",
             username: form.email,
             password: form.password,
             is_admin: false});
