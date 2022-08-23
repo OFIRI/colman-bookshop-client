@@ -6,13 +6,12 @@ import { useForm } from "react-hook-form";
 import { number, object, string } from "yup";
 import BookApi from "../../api/book.api";
 import { Book } from "../../types/Book";
+import axios from "../../Utils/axios";
 
 const schema = object().shape({
   title: string(),
   author: string(),
-  price: number()
-    .typeError("price must be a number")
-    .min(0, "price cannot be a negative number "),
+  price: string(),
 });
 interface ISearchFilterProps {
   setBooks: React.Dispatch<React.SetStateAction<Book[]>>;
@@ -30,8 +29,19 @@ const SearchFilter = ({ setBooks }: ISearchFilterProps) => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
-  const handleSearch = (data: any) => {
-    console.log(data);
+  const handleSearch = async (data: any) => {
+    try {
+      const response = await axios.get("/books/count/author");
+      console.log(response);
+      // const response = await BookApi.getFilteredBooks(
+      //   data.title,
+      //   data.author,
+      //   data.price
+      // );
+      // setBooks(response);
+    } catch (error) {
+      throw error;
+    }
   };
   return (
     <>
@@ -59,6 +69,7 @@ const SearchFilter = ({ setBooks }: ISearchFilterProps) => {
                 error={errors.price ? true : false}
                 //@ts-ignore
                 helperText={errors.price?.message}
+                inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
               />
             </Grid>
             <Grid item xs={3}>

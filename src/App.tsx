@@ -14,6 +14,7 @@ import AdminProtectedRoute from "./Components/ProtectedRoutes/AdminProtectedRout
 import AdminPage from "./Components/Admin/AdminPage";
 import ViewCart from "./Components/ShoppingCart/ViewCart";
 import BookTableContainer from "./Components/BookTable/BookTableContainer";
+import AuthorTable from "./AuthorTable/AuthorTable";
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
               <Route path="/EditBook/:id" element={<EditBookPage />} />
               <Route path="/CreateBook" element={<CreateBookPage />} />
               <Route path="/BooksTable" element={<BookTableContainer />} />
+              <Route path="/AuthorTable" element={<AuthorTable />} />
+
               <Route
                 path="/admin/*"
                 element={
