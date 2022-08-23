@@ -1,8 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Button, Container, Grid, Paper, TextField } from "@mui/material";
-import React, { FC, ReactNode } from "react";
+import React, { FC, ReactNode, useContext } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from 'yup';
+import { SessionContextStore } from "../../contexts/SessionContext/SessionContext";
 import './Register.css';
 
 
@@ -29,9 +30,17 @@ const RegisterSchema = yup.object().shape({
 const Register: FC<RegisterProps> = ({children}) =>{
 
     const {register, handleSubmit, formState: { errors }} = useForm<RegisterForm>({resolver: yupResolver(RegisterSchema)})
+    const { signUp } = useContext(SessionContextStore);
 
-    const onSubmit = (form:RegisterForm) =>{
-        console.log(form);
+    const onSubmit = async (form:RegisterForm) =>{
+        await signUp({
+            first_name: form.first_name,
+            last_name: form.last_name,
+            id: "",
+            _id: "",
+            username: form.email,
+            password: form.password,
+            is_admin: false});
     }
     console.log(errors)
 

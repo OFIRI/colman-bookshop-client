@@ -14,14 +14,18 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 import { SessionContextStore } from '../../contexts/SessionContext/SessionContext';
+import { ShoppingCart } from '@mui/icons-material';
+import { ShoppingContextStore } from '../../contexts/ShoppingContext/ShoppingContext';
 
-const pages = [{name: 'Books', route: '/'}, {name: 'About Us', route: '/about-us'}, {name: 'Register', route: '/register'}, {name: 'Login', route: '/login'}, {name: 'Manage', route: '/admin'}];
+const pages = [{name: 'Books', route: '/'}, {name: 'About Us', route: '/about-us'}, {name: 'Register', route: '/register'}, {name: 'Login', route: '/login'}, {name: 'Manage', route: '/admin/users'}];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-  const {user, isAdmin} = React.useContext(SessionContextStore);
+  const {user, isAdmin, logout} = React.useContext(SessionContextStore);
+  const { shoppingCart } = React.useContext(ShoppingContextStore);
+
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -34,7 +38,11 @@ const Navbar = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (setting: string) => {
+    switch(setting) {
+      case "Logout":
+        logout()
+    }
     setAnchorElUser(null);
   };
 
@@ -126,7 +134,7 @@ const Navbar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.filter(page => {
-                if (!user && (page.name === "Register" || page.name === "Login"))
+                if (user && (page.name === "Register" || page.name === "Login"))
                   return false;
                 if (!isAdmin && (page.name === "Manage"))
                   return false;
@@ -144,6 +152,15 @@ const Navbar = () => {
             ))}
           </Box>
 
+          {user &&<>
+            <Link to="/cart" style={{ textDecoration: 'none' }}>
+              <IconButton>
+                <ShoppingCart style={{color: 'white'}}/>
+              </IconButton>
+            </Link>
+          {shoppingCart && <Typography style={{marginRight: 10}}>{Object.keys(shoppingCart).reduce((prevKey, currKey) => {
+            return prevKey + shoppingCart[currKey].quantity }
+            , 0)} items in Cart</Typography> }
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -167,12 +184,14 @@ const Navbar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
+              <Typography variant='h6' style={{marginLeft: 10}}>{`${user?.first_name} ${user?.last_name}`}</Typography>
+          </>}
         </Toolbar>
       </div>
     </AppBar>
