@@ -15,6 +15,7 @@ import AdminPage from "./Components/Admin/AdminPage";
 import ViewCart from "./Components/ShoppingCart/ViewCart";
 import BookTableContainer from "./Components/BookTable/BookTableContainer";
 import { io } from "socket.io-client";
+import AuthorTable from "./AuthorTable/AuthorTable";
 
 const socket = io("ws://localhost:5000");
 
@@ -46,6 +47,8 @@ function App() {
               <Route path="/EditBook/:id" element={<EditBookPage />} />
               <Route path="/BooksTable" element={<BookTableContainer />} />
               <Route path="/CreateBook" element={<CreateBookPage />} />
+              <Route path="/AuthorTable" element={<AuthorTable />} />
+
               <Route
                 path="/admin/*"
                 element={

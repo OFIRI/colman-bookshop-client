@@ -1,11 +1,12 @@
 import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
-import axios from "axios";
-import { useState } from "react";
-import { useEffectOnce } from "../../hooks/useEffectOnce";
 import { Book } from "../../types/Book";
 import { BASE_URL } from "../../Utils/axios";
 import { UserChart } from "../Admin/UserChart";
+import { useEffect, useState } from "react";
+import { useEffectOnce } from "../../hooks/useEffectOnce";
+import axios from "../../Utils/axios";
+import CountMinSketch from "../CountMinSketch/CountMinSketch";
 import SearchFilter from "../SearchBooks/SearchFilter";
 import BookTable from "./BookTable";
 
@@ -23,8 +24,8 @@ const BookTableContainer = () => {
   useEffectOnce(() => {
     const InitCmSketch = async () => {
       try {
-        await axios.post(BASE_URL + "cmSketch/init");
-        const {data: cmData} = await axios.get(BASE_URL + "cmSketch/getAllCounts");
+        await axios.post("cmSketch/init");
+        const {data: cmData} = await axios.get("cmSketch/getAllCounts");
         const top =[];
         for (let j = 0; j < 5; j++) {
           let max = { count: 0}
