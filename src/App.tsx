@@ -15,19 +15,20 @@ import AdminPage from "./Components/Admin/AdminPage";
 import ViewCart from "./Components/ShoppingCart/ViewCart";
 import BookTableContainer from "./Components/BookTable/BookTableContainer";
 import { io } from "socket.io-client";
-import AuthorTable from "./AuthorTable/AuthorTable";
+import AuthorTable from "./Components/AuthorTable/AuthorTable";
+import AuthorByPriceTable from "./Components/AuthorByPriceTable/AuthorByPriceTable";
 
 const socket = io("ws://localhost:5000");
 
 function App() {
   useEffect(() => {
-    const id = localStorage.getItem('userId');
-    if(id){
-      socket.emit('sendUser', id);
+    const id = localStorage.getItem("userId");
+    if (id) {
+      socket.emit("sendUser", id);
     }
 
     return () => {
-      socket.emit('dc');
+      socket.emit("dc");
     };
   }, []);
 
@@ -48,6 +49,10 @@ function App() {
               <Route path="/BooksTable" element={<BookTableContainer />} />
               <Route path="/CreateBook" element={<CreateBookPage />} />
               <Route path="/AuthorTable" element={<AuthorTable />} />
+              <Route
+                path="/AuthorPriceTable"
+                element={<AuthorByPriceTable />}
+              />
 
               <Route
                 path="/admin/*"
