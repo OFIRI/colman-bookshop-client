@@ -1,5 +1,5 @@
 import { IconButton, TableCell, TableRow } from "@mui/material";
-import { authorGroupBy } from "../types/AuthorGroupBy";
+import { authorGroupBy } from "../../types/AuthorGroupBy";
 
 interface IAuthorRowProps {
   data: authorGroupBy;

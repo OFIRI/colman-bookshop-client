@@ -6,8 +6,8 @@ import {
   TableRow,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { authorGroupBy } from "../types/AuthorGroupBy";
-import axios from "../Utils/axios";
+import { authorGroupBy } from "../../types/AuthorGroupBy";
+import axios from "../../Utils/axios";
 import AuthorRow from "./AuthorRow";
 
 const AuthorTable = () => {

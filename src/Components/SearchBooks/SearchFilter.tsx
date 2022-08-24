@@ -28,17 +28,18 @@ const SearchFilter = ({ setBooks }: ISearchFilterProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: { title: "", author: "", price: "" },
+  });
   const handleSearch = async (data: any) => {
     try {
-      const response = await axios.get("/books/count/author");
-      console.log(response);
-      // const response = await BookApi.getFilteredBooks(
-      //   data.title,
-      //   data.author,
-      //   data.price
-      // );
-      // setBooks(response);
+      const response = await BookApi.getFilteredBooks(
+        data.title,
+        data.author,
+        data.price
+      );
+      setBooks(response);
     } catch (error) {
       throw error;
     }
