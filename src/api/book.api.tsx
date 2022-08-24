@@ -6,18 +6,18 @@ class BookApi {
     author: string,
     price: number
   ): Promise<Book[]> {
+    const params = {
+      title: title === "" ? undefined : title,
+      author: author === "" ? undefined : author,
+      price: price.toString() === "" ? undefined : price.toString(),
+    };
     try {
-      const response = await axios.get(
-        "books/" +
-          "author=" +
-          author +
-          "&" +
-          "title=" +
-          title +
-          "&" +
-          "price=" +
-          price
-      );
+      // const response = await axios.get(
+      //   `books/search/?title=${title}&author=${author}&price=${price}`
+      // );
+      const response = await axios.get("books/", {
+        params,
+      });
       const data = response.data;
       return data;
     } catch (error) {

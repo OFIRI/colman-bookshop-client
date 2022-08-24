@@ -5,8 +5,6 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { useEffect, useState } from "react";
-import BookApi from "../../api/book.api";
 import { Book } from "../../types/Book";
 import BookRow from "./BookRow";
 

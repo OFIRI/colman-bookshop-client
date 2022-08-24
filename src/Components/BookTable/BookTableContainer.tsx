@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { Grid } from "@mui/material";
+import { Box } from "@mui/system";
 import { Book } from "../../types/Book";
+import { BASE_URL } from "../../Utils/axios";
+import { UserChart } from "../Admin/UserChart";
+import { useEffect, useState } from "react";
+import { useEffectOnce } from "../../hooks/useEffectOnce";
+import axios from "../../Utils/axios";
+import CountMinSketch from "../CountMinSketch/CountMinSketch";
 import SearchFilter from "../SearchBooks/SearchFilter";
 import BookTable from "./BookTable";
 
 const BookTableContainer = () => {
   const [books, setBooks] = useState<Book[]>([]);
+  const [data, setData] = useState<any>(null);
   const handleDelete = (oldBook: Book) => {
     if (books) {
       const tempBooks = [...books];
@@ -12,9 +20,39 @@ const BookTableContainer = () => {
       setBooks(bookArray);
     }
   };
+
+  useEffectOnce(() => {
+    const InitCmSketch = async () => {
+      try {
+        await axios.post("cmSketch/init");
+        const {data: cmData} = await axios.get("cmSketch/getAllCounts");
+        const top =[];
+        for (let j = 0; j < 5; j++) {
+          let max = { count: 0}
+          let i = 0;
+          for (let index = 0; index < cmData.length; index++) {
+            if (cmData[index].count > max.count) {
+              i = index;
+              max = cmData[index];
+            }
+          }
+          top.push(cmData[i])
+          cmData.splice(i, 1);
+        }
+        setData(top);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    InitCmSketch();
+  });
+
   return (
     <>
       <SearchFilter setBooks={setBooks} />
+      <Grid container item xs={2} sm={2} md={2} lg={1} xl={1}>
+        <UserChart dataset={data}/>
+      </Grid>
       <BookTable books={books} handleDelete={handleDelete} />
     </>
   );
