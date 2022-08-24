@@ -17,7 +17,8 @@ import { SessionContextStore } from '../../contexts/SessionContext/SessionContex
 import { ShoppingCart } from '@mui/icons-material';
 import { ShoppingContextStore } from '../../contexts/ShoppingContext/ShoppingContext';
 
-const pages = [{name: 'Books', route: '/'}, {name: 'About Us', route: '/about-us'}, {name: 'Register', route: '/register'}, {name: 'Login', route: '/login'}, {name: 'Manage', route: '/admin/users'}];
+const pages = [{name: 'Books', route: '/'}, {name: 'About Us', route: '/about-us'}, {name: 'Register', route: '/register'}, {name: 'Login', route: '/login'}, {name: 'Manage', route: '/admin/users'}, 
+{name: 'Authors', route: '/AuthorTable'}, {name: 'Author prices', route: '/AuthorPriceTable'}];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Navbar = () => {
